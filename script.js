@@ -1,9 +1,21 @@
-let recetas = JSON.parse(localStorage.getItem("recetas")) || [];
+import { db } from "./firebase.js";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+let recetas = JSON.parse(firebaseConfig.getItem("recetas")) || [];
+
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 // ---------- RECETAS ----------
-function agregarReceta() {
+async function agregarReceta() {
   const nombre = nombreReceta.value;
-  const categoria = document.getElementById("categoria").value;
+  const categoria ="categoria".value;
   const ing = ingredientes.value;
   const prep = preparacion.value;
   const file = imagenReceta.files[0];
@@ -14,11 +26,16 @@ function agregarReceta() {
   }
 
   const reader = new FileReader();
-  reader.onload = function(e) {
+  reader.onload = async function(e) {
     const imagen = e.target.result;
 
-    recetas.push({ nombre, categoria, ing, prep, imagen });
-    localStorage.setItem("recetas", JSON.stringify(recetas));
+    await addDoc(collection(db, "recetas"), {
+      nombre,
+      categoria,
+      ing,
+      prep,
+      imagen
+    });
 
     mostrarRecetas();  
     limpiarFormulario(); 
@@ -34,11 +51,14 @@ function limpiarFormulario() {
   imagenReceta.value = "";
 }
 
-function mostrarRecetas() {
+async function mostrarRecetas() {
   let cont = document.getElementById("listaRecetas");
   cont.innerHTML = "";
 
-  recetas.forEach((r, index) => {
+  const querySnapshot = await getDocs(collection(db, "recetas"));
+
+   querySnapshot.forEach((docu) => {
+    const r = docu.data();
 
    let listaIngredientes = r.ing
   .split("\n")
@@ -52,17 +72,12 @@ function mostrarRecetas() {
   .join("");
 
     cont.innerHTML += `
-        <div class="receta">
-      <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
-        <h4 style="text-align:center;">${r.nombre}</h4>
-        <p><b>Categoría:</b> ${r.categoria}</p>
-        <img src="${r.imagen}" width="200" style="display:block; margin:auto;">
-
-        <p><b>Ingredientes:</b></p>
-        <ul>${listaIngredientes}</ul>
-
-        <p><b>Preparación:</b></p>
-        <ol>${listaPreparacion}</ol>
+        <<div class="receta">
+        <h4>${r.nombre}</h4>
+        <p>${r.categoria}</p>
+        <img src="${r.imagen}" width="200">
+        <p>${r.ing}</p>
+        <p>${r.prep}</p>
 
         <button onclick="eliminarReceta(${index})">Eliminar</button>
       </div>
@@ -130,4 +145,21 @@ function filtrarCategoria() {
   });
 }
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBakxGYY6NU_-Vx83W8_7L-3Wx0xsPipm0",
+  authDomain: "recetario-cocina-164e9.firebaseapp.com",
+  projectId: "recetario-cocina-164e9",
+  storageBucket: "recetario-cocina-164e9.firebasestorage.app",
+  messagingSenderId: "27276510710",
+  appId: "1:27276510710:web:e4a3e86f2757c4b2b6f3d7",
+  measurementId: "G-N3KQH29MV7"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
 mostrarRecetas();
+
+
