@@ -1,3 +1,4 @@
+<script type="module"></script>
 import { db } from "./firebase.js";
 import {
   collection,
@@ -5,7 +6,10 @@ import {
   getDocs,
   deleteDoc,
   doc
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
 
 let recetas = JSON.parse(firebaseConfig.getItem("recetas")) || [];
 
@@ -161,5 +165,7 @@ const analytics = getAnalytics(app);
 
 
 mostrarRecetas();
+
+
 
 
