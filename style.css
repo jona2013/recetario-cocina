@@ -1,0 +1,127 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f4f8;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffecd2, #fcb69f);
+}
+
+
+h2 {
+  text-align: center;
+  color: #0d0abd;
+  font-size: 28px;
+  margin: 20px 0;
+}
+
+h1 {
+  text-align: center;
+  color: #0d0abd;
+}
+
+
+
+section {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+input, textarea {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 6px;
+}
+
+button {
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 4px;
+}
+
+
+select {
+  margin: 10px 0;
+  padding: 5px;
+}
+
+.receta img {
+  display: block;
+  margin: 10px auto;
+}
+
+.receta h4 {
+  text-align: center;
+}
+
+.receta img {
+  display: block;
+  margin: 10px auto;
+}
+
+.receta h4 {
+  text-align: center;
+}
+
+.receta {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px auto;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.receta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+button {
+  background: #0d0abd;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background: #4c00ff;
+}
+
+nput, textarea, select {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.receta {
+  animation: aparecer 0.4s ease;
+}
+
+.mayus {
+  color: rgb(85, 58, 180);
+  font-weight: bold;
+}

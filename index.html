@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>App Personal</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2c3e50">
+</head>
+<body>
+
+<h1>recetas</h1>
+
+
+<!-- RECETAS -->
+<section id="recetas">
+    <select id="filtroCategoria" onchange="filtrarCategoria()">
+  <option value="">Todas</option>
+  <option value="Desayuno">Desayuno</option>
+  <option value="Almuerzo">Almuerzo</option>
+  <option value="Cena">Cena</option>
+  <option value="Postre">Postre</option>
+  <option value="Bebida">Bebida</option>
+</select>
+
+    <input type="text" id="buscador" placeholder="Buscar receta..." onkeyup="buscarRecetas()">
+  <h2>Recetario</h2>
+  <input id="nombreReceta" placeholder="Nombre">
+  <textarea id="ingredientes" placeholder="Ingredientes"></textarea>
+  <textarea id="preparacion" placeholder="Preparación"></textarea>
+  <input type="file" id="imagenReceta" accept="image/*">
+  <button onclick="agregarReceta()">Guardar</button>
+
+  <select id="categoria">
+  <option value="Desayuno">Desayuno</option>
+  <option value="Almuerzo">Almuerzo</option>
+  <option value="Cena">Cena</option>
+  <option value="Postre">Postre</option>
+  <option value="Bebida">Bebida</option>
+</select>
+  <div id="listaRecetas"></div>
+</section>
+
+
+
+<script src="script.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
+</body>
+</html>
